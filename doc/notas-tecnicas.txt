@@ -1,0 +1,45 @@
+######################################################
+# REDIS
+######################################################
+  # Instalación de un contenedor de Redis
+  # 1. Descargamos la ultima version oficial estable
+  docker pull redis:latest
+
+  # 2. Iniciamos el servidor de Redis
+  docker run --name flisol-redis -p 6379:6379 -d redis
+
+  # 3. Probar la conexión
+  docker exec -it flisol-redis redis-cli ping
+
+######################################################
+# SWAGGER
+######################################################
+  # Open API JSON:
+  # Es el contrato de nuestro API. Es un documento legible por computadoras que describe exactamente cómo funciona nuestro servicio web sin necesidad de ver el código fuente.
+  http://localhost:8080/v3/api-docs
+  
+  # Swagger UI:
+  # Es la interfaz gráfica que convierte ese código en algo fácil de usar para las personas.
+  # Además de servir como una documentación interactiva y funcional.
+  # Te permite ver todos los recursos de tu API organizados por controladores y etiquetas, mostrando claramente qué datos enviar y qué esperar recibir.
+  http://localhost:8080/swagger-ui/index.html
+
+######################################################
+# GRAAL-VM
+######################################################
+  # Pre-requisitos:
+  # 1. Referir a la documentación segun sistema operativo:
+  https://www.graalvm.org/latest/getting-started/windows/
+  https://www.graalvm.org/latest/getting-started/macos/
+  https://www.graalvm.org/latest/getting-started/linux/
+
+  # 2. Ejecutar el comando 
+  ./mvnw -Pnative native:compile
+
+  # Lo que ocurre detrás de cámara es que 
+  # Se ejecuta un Análisis AOT: Spring Boot genera el código de configuración optimizado. 
+  # Se crea una imagen nativa al Sistema Operativo: GraalVM escanea el bytecode, elimina lo que no usas (tree-shaking) y crea un ejecutable .exe.
+  # Resultado: En la carpeta /target estará ese ejecutable, que arranca en milisegundos y consume una fracción de la RAM habitual
+
+  
+  
